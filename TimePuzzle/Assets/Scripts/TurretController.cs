@@ -19,6 +19,7 @@ public class TurretController : MonoBehaviour
     public float rocketAcceleration;
     public bool rocketHoming;
     public bool moveWithPlayer;
+    public int fireDelay;
 
     // Start is called before the first frame update
     void Start()
@@ -33,7 +34,8 @@ public class TurretController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (moveWithPlayer == PlayerController.GetIsMoving())
+        //if (moveWithPlayer == PlayerController.GetIsMoving())
+        if (moveWithPlayer == player.GetIsMoving())
         {
             direction = player.transform.position - transform.position;
             angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90f;
@@ -45,7 +47,7 @@ public class TurretController : MonoBehaviour
                 turret.rotation = angle;
                 //transform.rotation = angle;
 
-                if (seePlayer == 120) //in sight for 120 continuous frames (2 seconds)
+                if (seePlayer == fireDelay) //in sight for 120 continuous frames (2 seconds)
                 {
                     //Instantiate(rocket, transform.position, transform.rotation);
                     RocketController clone = Instantiate(projectile, transform.position, transform.rotation) as RocketController;

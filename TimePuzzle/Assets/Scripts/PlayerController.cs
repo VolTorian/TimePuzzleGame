@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
     float horizontal;
     float vertical;
     float moveLimiter = 0.7f;
-    static bool isMoving;
+    bool isMoving;
 
     public float runSpeed = 20.0f;
 
@@ -43,7 +43,7 @@ public class PlayerController : MonoBehaviour
         body.velocity = new Vector2(horizontal * runSpeed, vertical * runSpeed);
     }
 
-    public static bool GetIsMoving()
+    public bool GetIsMoving()
     {
         return isMoving;
     }

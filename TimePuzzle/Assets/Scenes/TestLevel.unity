@@ -218,10 +218,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   projectile: {fileID: 4260586021961256384, guid: 9bae9c6c79cc6254ebf71ec428de63e4,
     type: 3}
-  rocketMaxSpeed: 50
-  rocketAcceleration: 100
+  rocketMaxSpeed: 20
+  rocketAcceleration: 10
   rocketHoming: 0
   moveWithPlayer: 1
+  fireDelay: 60
 --- !u!50 &44947388
 Rigidbody2D:
   serializedVersion: 4
