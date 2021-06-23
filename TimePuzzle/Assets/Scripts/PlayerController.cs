@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     float vertical;
     float moveLimiter = 0.7f;
     bool isMoving;
+    Vector2 prevPosition;
 
     public float runSpeed = 20.0f;
 
@@ -17,6 +18,7 @@ public class PlayerController : MonoBehaviour
     {
         body = GetComponent<Rigidbody2D>();
         isMoving = false;
+        prevPosition = body.transform.position;
     }
 
     void Update()
@@ -28,11 +30,6 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (horizontal == 0 && vertical == 0)
-            isMoving = false;
-        else
-            isMoving = true;
-
         if (horizontal != 0 && vertical != 0) // Check for diagonal movement
         {
             // limit movement speed diagonally, so you move at 70% speed
@@ -41,6 +38,14 @@ public class PlayerController : MonoBehaviour
         }
 
         body.velocity = new Vector2(horizontal * runSpeed, vertical * runSpeed);
+        //Debug.Log(body.velocity.magnitude);
+
+        if (Vector2.Distance(prevPosition, body.transform.position) < .001f)
+            isMoving = false;
+        else
+            isMoving = true;
+
+        prevPosition = body.transform.position;
     }
 
     public bool GetIsMoving()

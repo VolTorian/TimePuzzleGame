@@ -38,7 +38,6 @@ public class LevelManager : MonoBehaviour
         player.GetComponent<Renderer>().enabled = false;
         player.GetComponent<BoxCollider2D>().enabled = false;
         player.transform.position = spawnpoint.transform.position;
-        //Destroy(player);
         yield return new WaitForSeconds(respawnDelay);
 
         SceneManager.LoadScene(level);

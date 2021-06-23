@@ -219,8 +219,7 @@ MonoBehaviour:
   projectile: {fileID: 4260586021961256384, guid: 9bae9c6c79cc6254ebf71ec428de63e4,
     type: 3}
   rocketMaxSpeed: 5
-  rocketAcceleration: 20
-  rocketHoming: 0
+  rocketAcceleration: 10
   rocketAngleChangeSpeed: 700
   moveWithPlayer: 1
   fireDelay: 60
@@ -232,7 +231,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 44947384}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -1027,7 +1026,7 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!61 &917124138
 BoxCollider2D:
@@ -1994,7 +1993,7 @@ PrefabInstance:
     - target: {fileID: 400419739007185737, guid: b5e2b6354bc9e8540a5e5f1455009d5b,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -6
+      value: -7
       objectReference: {fileID: 0}
     - target: {fileID: 400419739007185737, guid: b5e2b6354bc9e8540a5e5f1455009d5b,
         type: 3}
