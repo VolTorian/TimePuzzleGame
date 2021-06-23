@@ -25,7 +25,7 @@ public class RocketController : MonoBehaviour
         storedVelocity = new Vector2(0, 0);
         storedAngularVelocity = 0;
         justMoved = false;
-        angleChangeSpeed = 160;
+        //angleChangeSpeed = 160;
     }
 
     // Update is called once per frame
@@ -54,12 +54,29 @@ public class RocketController : MonoBehaviour
             float rotateAmount = Vector3.Cross(direction, transform.up).z;
             rocket.angularVelocity = -angleChangeSpeed * rotateAmount;
 
-            if (rocket.velocity.sqrMagnitude < maxSpeed * maxSpeed) //does this perform better than simply magnitude < maxSpeed ?
+            //if (rocket.velocity.sqrMagnitude < maxSpeed * maxSpeed) //does this perform better than simply magnitude < maxSpeed ?
+            //if ((transform.rotation * rocket.velocity * -1).y < maxSpeed && acceleration + (transform.rotation * rocket.velocity * -1).y < maxSpeed) //velocity in the rocket's up direction - figure out why this works
+            if (transform.InverseTransformDirection(rocket.velocity).y < maxSpeed && acceleration + transform.InverseTransformDirection(rocket.velocity).y < maxSpeed)
             {
                 rocket.AddForce(transform.up * acceleration);
-                storedVelocity = rocket.velocity;
+                //storedVelocity = rocket.velocity;
+                //Debug.Log("if true");
             }
-            //storedVelocity = rocket.velocity;
+            else
+            {
+                //rocket.velocity = Vector2.ClampMagnitude(rocket.velocity, maxSpeed);
+                //rocket.velocity.Set((transform.rotation * rocket.velocity).x, maxSpeed);
+                //rocket.AddForce(transform.up * (maxSpeed - (transform.rotation * rocket.velocity * -1).y));
+                //rocket.AddForce(transform.up * (maxSpeed - transform.InverseTransformDirection(rocket.velocity).y));
+                //Debug.Log(maxSpeed - (transform.rotation * rocket.velocity).y);
+                Vector2 localVelocity = transform.InverseTransformDirection(rocket.velocity);
+                localVelocity.y = maxSpeed;
+                rocket.velocity = transform.TransformDirection(localVelocity);
+                //Debug.Log("if false");
+
+            }
+            //Debug.Log(rocket.velocity.magnitude);
+            storedVelocity = rocket.velocity;//needs to be here so rockets don't get a "burst" in the direction they are facing if they start moving again after a freeze
         }
         else
         {
@@ -75,11 +92,12 @@ public class RocketController : MonoBehaviour
         Destroy(gameObject);
     }
 
-    public void setAttributes(float maxSpeed, float acceleration, bool homing, bool moveWithPlayer)
+    public void setAttributes(float maxSpeed, float acceleration, bool homing, bool moveWithPlayer, float angleChangeSpeed)
     {
         this.maxSpeed = maxSpeed;
         this.acceleration = acceleration;
         this.homing = homing;
         this.moveWithPlayer = moveWithPlayer;
+        this.angleChangeSpeed = angleChangeSpeed;
     }
 }

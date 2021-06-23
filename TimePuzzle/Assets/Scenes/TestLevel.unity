@@ -148,7 +148,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 44947384}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 5, y: 0, z: 0}
+  m_LocalPosition: {x: 25, y: -13, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1776376009}
@@ -218,11 +218,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   projectile: {fileID: 4260586021961256384, guid: 9bae9c6c79cc6254ebf71ec428de63e4,
     type: 3}
-  rocketMaxSpeed: 20
-  rocketAcceleration: 10
+  rocketMaxSpeed: 10
+  rocketAcceleration: 20
   rocketHoming: 0
+  rocketAngleChangeSpeed: 0
   moveWithPlayer: 1
-  fireDelay: 60
+  fireDelay: 180
 --- !u!50 &44947388
 Rigidbody2D:
   serializedVersion: 4

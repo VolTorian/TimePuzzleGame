@@ -18,6 +18,7 @@ public class TurretController : MonoBehaviour
     public float rocketMaxSpeed;
     public float rocketAcceleration;
     public bool rocketHoming;
+    public float rocketAngleChangeSpeed;
     public bool moveWithPlayer;
     public int fireDelay;
 
@@ -51,7 +52,7 @@ public class TurretController : MonoBehaviour
                 {
                     //Instantiate(rocket, transform.position, transform.rotation);
                     RocketController clone = Instantiate(projectile, transform.position, transform.rotation) as RocketController;
-                    clone.setAttributes(rocketMaxSpeed, rocketAcceleration, rocketHoming, moveWithPlayer);
+                    clone.setAttributes(rocketMaxSpeed, rocketAcceleration, rocketHoming, moveWithPlayer, rocketAngleChangeSpeed);
                     //transform.position = player.transform.position;
                     seePlayer = 0;
                     //fire rocket
