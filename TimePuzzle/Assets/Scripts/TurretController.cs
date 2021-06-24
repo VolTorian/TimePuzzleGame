@@ -19,7 +19,7 @@ public class TurretController : MonoBehaviour
     public float rocketAcceleration;
     public float rocketAngleChangeSpeed;
     public bool moveWithPlayer;
-    public int fireDelay;
+    public int fireDelay;//in seconds
 
     // Start is called before the first frame update
     void Start()
@@ -34,6 +34,7 @@ public class TurretController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        /*
         //if (moveWithPlayer == PlayerController.GetIsMoving())
         if (moveWithPlayer == player.GetIsMoving())
         {
@@ -47,7 +48,7 @@ public class TurretController : MonoBehaviour
                 turret.rotation = angle;
                 //transform.rotation = angle;
 
-                if (seePlayer == fireDelay) //in sight for 120 continuous frames (2 seconds)
+                if (seePlayer == fireDelay) //in frames, running at 60 fps
                 {
                     //Instantiate(rocket, transform.position, transform.rotation);
                     RocketController clone = Instantiate(projectile, transform.position, transform.rotation) as RocketController;
@@ -61,6 +62,39 @@ public class TurretController : MonoBehaviour
             {
                 seePlayer = 0;
             }
+        
+        }*/
+    }
+
+    private void FixedUpdate()
+    {
+        if (moveWithPlayer == player.GetIsMoving())
+        {
+            direction = player.transform.position - transform.position;
+            angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90f;
+            hit = Physics2D.Raycast(transform.position, direction, Mathf.Infinity, ignoreLayer);
+
+            if (hit.collider.name == "Player")
+            {
+                seePlayer += Time.deltaTime;
+                turret.rotation = angle;
+                //transform.rotation = angle;
+
+                if (seePlayer >= fireDelay)
+                {
+                    //Instantiate(rocket, transform.position, transform.rotation);
+                    RocketController clone = Instantiate(projectile, transform.position, transform.rotation) as RocketController;
+                    clone.setAttributes(rocketMaxSpeed, rocketAcceleration, moveWithPlayer, rocketAngleChangeSpeed);
+                    //transform.position = player.transform.position;
+                    seePlayer = 0;
+                    //fire rocket
+                }
+            }
+            else
+            {
+                seePlayer = 0;
+            }
+
         }
     }
 }

@@ -12,7 +12,7 @@ public class PlayerController : MonoBehaviour
     bool isMoving;
     Vector2 prevPosition;
 
-    public float runSpeed = 20.0f;
+    public float runSpeed;
 
     void Start()
     {

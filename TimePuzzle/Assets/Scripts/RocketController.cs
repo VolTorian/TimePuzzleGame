@@ -24,7 +24,6 @@ public class RocketController : MonoBehaviour
         storedVelocity = new Vector2(0, 0);
         storedAngularVelocity = 0;
         justMoved = false;
-        //angleChangeSpeed = 160;
     }
 
     // Update is called once per frame
@@ -55,6 +54,7 @@ public class RocketController : MonoBehaviour
             {
                 rocket.angularVelocity = 0;
             }
+            //Debug.Log(rocket.angularVelocity);
 
             rocket.AddForce(transform.up * acceleration);
             //Debug.Log(transform.InverseTransformDirection(rocket.velocity).y);
