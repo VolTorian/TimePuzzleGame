@@ -148,7 +148,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 44947384}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 25, y: -13, z: 0}
+  m_LocalPosition: {x: 25, y: -6, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1776376009}
@@ -219,8 +219,9 @@ MonoBehaviour:
   projectile: {fileID: 4260586021961256384, guid: 9bae9c6c79cc6254ebf71ec428de63e4,
     type: 3}
   rocketMaxSpeed: 5
-  rocketAcceleration: 20
+  rocketAcceleration: 10
   rocketAngleChangeSpeed: 700
+  rocketBlastRadius: 5
   moveWithPlayer: 1
   fireDelay: 1
 --- !u!50 &44947388
@@ -1233,7 +1234,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &938929011
 Transform:
   m_ObjectHideFlags: 0
@@ -1286,6 +1287,7 @@ MonoBehaviour:
   rocketMaxSpeed: 5
   rocketAcceleration: 10
   rocketAngleChangeSpeed: 350
+  rocketBlastRadius: 0
   moveWithPlayer: 0
   fireDelay: 1
 --- !u!212 &938929014
@@ -1619,6 +1621,36 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1691869568
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1691869569}
+  m_Layer: 0
+  m_Name: Position tester
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &1691869569
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1691869568}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -2.8, y: -4.1, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1692856928 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400419739007185737, guid: b5e2b6354bc9e8540a5e5f1455009d5b,

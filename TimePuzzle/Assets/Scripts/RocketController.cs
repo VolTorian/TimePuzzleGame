@@ -6,11 +6,14 @@ public class RocketController : MonoBehaviour
 {
     Rigidbody2D rocket;
     private PlayerController player;
+    LevelManager levelManager;
+    int ignoreLayer;
 
     float maxSpeed;
     float acceleration;
     bool moveWithPlayer;
     float angleChangeSpeed;//zero for non homing
+    float blastRadius;
 
     Vector2 storedVelocity;
     float storedAngularVelocity;
@@ -24,6 +27,9 @@ public class RocketController : MonoBehaviour
         storedVelocity = new Vector2(0, 0);
         storedAngularVelocity = 0;
         justMoved = false;
+        ignoreLayer = 1 << 10;
+        ignoreLayer = ~ignoreLayer; //ignore layer 10 (layer with projectiles)
+        levelManager = FindObjectOfType<LevelManager>();
     }
 
     // Update is called once per frame
@@ -74,14 +80,36 @@ public class RocketController : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
+        Vector2 explosionPos = (Vector2)transform.position - 0.5f * rocket.velocity.normalized;//so it doesn't start the raycast in the wall?
+        //Debug.Log("position of collision: " + (Vector2)transform.position);
+        //Debug.Log(rocket.velocity.normalized);
+        //Debug.Log("raycasting from " + explosionPos + " to " + (Vector2)player.transform.position + ". Distance: " + Vector2.Distance(player.transform.position, explosionPos));
+
+        RaycastHit2D raycastCheck;
+        Vector2 direction;
+        float angle;
         Destroy(gameObject);
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(explosionPos, blastRadius);
+        //coroutine for explosion animation?
+        foreach (Collider2D hit in colliders)
+        {
+            direction = player.transform.position - transform.position;
+            angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90f;
+            raycastCheck = Physics2D.Raycast(transform.position, direction, blastRadius, ignoreLayer);
+            if (raycastCheck && raycastCheck.collider.name == "Player")
+            {
+                levelManager.RespawnPlayer();
+            }
+        }
+
     }
 
-    public void setAttributes(float maxSpeed, float acceleration, bool moveWithPlayer, float angleChangeSpeed)
+    public void setAttributes(float maxSpeed, float acceleration, bool moveWithPlayer, float angleChangeSpeed, float blastRadius)
     {
         this.maxSpeed = maxSpeed;
         this.acceleration = acceleration;
         this.moveWithPlayer = moveWithPlayer;
         this.angleChangeSpeed = angleChangeSpeed;
+        this.blastRadius = blastRadius;
     }
 }
