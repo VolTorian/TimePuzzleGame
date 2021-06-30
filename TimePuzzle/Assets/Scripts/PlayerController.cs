@@ -40,7 +40,7 @@ public class PlayerController : MonoBehaviour
         body.velocity = new Vector2(horizontal * runSpeed, vertical * runSpeed);
         //Debug.Log(body.velocity.magnitude);
 
-        if (Vector2.Distance(prevPosition, body.transform.position) < .001f)
+        if (Vector2.Distance(prevPosition, body.transform.position) < .001f)//so the player can't pass the time by moving into a wall without actually changing positions
             isMoving = false;
         else
             isMoving = true;
