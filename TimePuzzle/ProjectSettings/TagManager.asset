@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Projectile
+  - Key
   layers:
   - Default
   - TransparentFX

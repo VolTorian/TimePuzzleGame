@@ -25,7 +25,6 @@ public class LevelManager : MonoBehaviour
         player = FindObjectOfType<PlayerController>();
         movingTotalTime = 0;
         stillTotalTime = 0;
-
     }
 
     // Update is called once per frame

@@ -11,6 +11,7 @@ public class LaserEmitter : MonoBehaviour
 
     PlayerController player;
     LevelManager levelManager;
+    int ignoreLayer;
 
     public LineRenderer laserUp;
     public LineRenderer laserDown;
@@ -32,6 +33,8 @@ public class LaserEmitter : MonoBehaviour
         laserUp.endWidth = laserDown.endWidth = laserLeft.endWidth = laserRight.endWidth = 0.25f;
         laserUp.startColor = laserDown.startColor = laserLeft.startColor = laserRight.startColor = Color.red;
         laserUp.endColor = laserDown.endColor = laserLeft.endColor = laserRight.endColor = Color.red;
+        ignoreLayer = 1 << 11;//laser/raycast ignores collectable items like keys
+        ignoreLayer = ~ignoreLayer;
     }
 
     private void Update()//FixedUpdate makes the lasers "lag" behind the node, hopefully being in Update doesn't screw up anything
@@ -64,7 +67,7 @@ public class LaserEmitter : MonoBehaviour
 
         laser.SetPosition(0, transform.position);
         //Debug.Log(transform.position);
-        hit = Physics2D.Raycast(ray.origin, direction);
+        hit = Physics2D.Raycast(ray.origin, direction, Mathf.Infinity, ignoreLayer);
 
         if (hit.collider)
         {
