@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
     float moveLimiter = 0.7f;
     bool isMoving;
     Vector2 prevPosition;
+    LevelManager levelManager;
 
     public float runSpeed;
     public AudioClip pickup;
@@ -20,12 +21,13 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
+        levelManager = FindObjectOfType<LevelManager>();
         body = GetComponent<Rigidbody2D>();
         isMoving = false;
         prevPosition = body.transform.position;
 
         keysCollected = 0;
-        keys = GameObject.FindGameObjectsWithTag("Key");
+        keys = GameObject.FindGameObjectsWithTag("MainKey");
         Debug.Log("number of keys: " + keys.Length);
     }
 
@@ -60,14 +62,18 @@ public class PlayerController : MonoBehaviour
     {
         return isMoving;
     }
+
     void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log(other + " entered");
-        if (other.gameObject.CompareTag("Key"))
+        //Debug.Log(other + " entered");
+        if (other.gameObject.CompareTag("MainKey"))
         {
             //AudioSource.PlayClipAtPoint(pickup, transform.position);
             other.gameObject.SetActive(false);
             keysCollected++;
+
+            if (keysCollected >= keys.Length)
+                levelManager.RemoveGate();
         }
     }
 }

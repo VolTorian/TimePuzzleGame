@@ -5,7 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Projectile
-  - Key
+  - MainKey
+  - BarrierA
   layers:
   - Default
   - TransparentFX
@@ -18,7 +19,7 @@ TagManager:
   - Player
   - Walls, hazards, enemies
   - Enemy projectiles
-  - 
+  - Collectables
   - 
   - 
   - 

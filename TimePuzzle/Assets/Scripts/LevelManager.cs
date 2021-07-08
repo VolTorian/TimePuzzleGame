@@ -12,6 +12,7 @@ public class LevelManager : MonoBehaviour
     public GameObject respawnParticle;
     public float respawnDelay;
     public string level;
+    public GameObject gate;
 
     public TextMeshProUGUI movingTimer;
     public TextMeshProUGUI stillTimer;
@@ -76,5 +77,11 @@ public class LevelManager : MonoBehaviour
         
         //Instantiate(respawnParticle, spawnpoint.transform.position, spawnpoint.transform.rotation);
         **/
+    }
+
+    public void RemoveGate()
+    {
+        //Debug.Log("in removegate");
+        gate.SetActive(false);
     }
 }
