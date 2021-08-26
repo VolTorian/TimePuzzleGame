@@ -1,0 +1,18 @@
+Added features:
+-homing projectiles - June 22, 2021
+-in game timer - June 23, 2021
+-projectile explosions - June 26, 2021
+-back and forth movement for stage elements - June 28, 2021
+-laser emitters - June 29, 2021
+-level keys (no gates) - June 30, 2021
+-level gates, barriers and barrier keys - July 8, 2021
+
+Planned features:
+-title screen
+-levels
+-level selection
+-object sprites
+-total time tracker
+-stat trackers
+-basic music?
+-basic sound effects?
